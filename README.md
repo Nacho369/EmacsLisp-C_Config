@@ -1,2 +1,2 @@
 ### EmacsLisp-C_Config
-C configuration for Emacs Lisp Language
+C configuration for Emacs Terminal Editor
