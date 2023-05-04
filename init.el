@@ -16,22 +16,9 @@
 )
 
 ;INSERT ANY CODE BELOW
+(eval-after-load "cc-mode"
+  '(define-key c-mode-map (kbd "TAB")
+	 'self-insert-command))
 
-;(define-key map "backspace" 'backward-delete-char global-map)
-;(global-set-key (kbd "backspace") 'delete-backward-char)
-;(global-set-key (kbd "C-u backspace") 'C-backspace)
-
-(global-set-key (kbd "Backspace") 'backward-delete-whitespace-to-column)
-(defun backward-delete-whitespace-to-column ()
-  "delete back to the previous column of whitespace, or as much whitespace as possible,
-or just one char if that's not possible"
-  (interactive)
-  (if indent-tabs-mode
-      (call-interactively 'backward-delete-char)
-    (let ((movement (% (current-column) tab-width))
-          (p (point)))
-      (when (= movement 0) (setq movement tab-width))
-      (save-match-data
-        (if (string-match "\\w*\\(\\s-+\\)$" (buffer-substring-no-properties (- p movement) p))
-            (backward-delete-char (- (match-end 1) (match-beginning 1)))
-        (call-interactively 'backward-delete-char))))))
+(global-set-key (kbd "DEL") 'backward-delete-char)
+(setq c-backspace-function 'backward-delete-char)
